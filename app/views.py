@@ -9,5 +9,9 @@ def index(request):
     }
     return render(request, 'pages/index.html', context)
 
-def product_detail(request):
-    return render(request, 'pages/product-detail.html')
+def product_detail(request, slug):
+    product = Product.objects.get(slug=slug)
+    context = {
+        'product':product,
+    }
+    return render(request, 'pages/product-detail.html', context)

@@ -3,5 +3,5 @@ from app import views
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('product-detail', views.product_detail, name="product_detail"),
+    path('product-detail/<slug:slug>', views.product_detail, name="product_detail"),
 ]
