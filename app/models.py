@@ -1,12 +1,15 @@
 from django.db import models
-
+from django.urls import reverse
 # Create your models here.
 class Category(models.Model):
     category_name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
     description= models.TextField()
     image = models.ImageField(upload_to='photos/categories', blank=True)
-
+    
+    # def get_url(self):
+    #     return reverse('store', args=[self.slug])
+    
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "Categories"
@@ -26,5 +29,23 @@ class Product(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	modified_at = models.DateTimeField(auto_now=True)
 	
+	def get_url(self):
+		return reverse('product_detail', args=[self.category.slug, self.slug])
+
 	def __str__(self):
 		return self.product_name
+      
+class Cart(models.Model):
+	date_added = models.DateTimeField(auto_now_add=True)
+	
+	def __str__(self):
+		return self.id
+
+class CartItem(models.Model):
+	product = models.ForeignKey(Product,on_delete=models.CASCADE)
+	cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+	quantity = models.IntegerField()
+	is_active = models.BooleanField(default=True)
+	
+	def __str__(self):
+		return self.product
