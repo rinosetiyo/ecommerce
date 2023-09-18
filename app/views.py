@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from app.models import Product, Category, CartItem, Cart
+from app.models import Product, Category, CartItem, Cart, Variation
+from django.core.paginator import EmptyPage, Paginator, PageNotAnInteger
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -40,6 +42,9 @@ def store(request, category_slug=None):
         product_count = products.count()
     else:
         products = Product.objects.all().filter(is_available=True)
+        # paginator = Paginator(products, 6)
+        # page = request.GET('page')
+        # paged_products = Paginator.get_page(page)
         product_count = products.count()	
     
     context = { 'products':products, 'product_count':product_count, }
@@ -53,6 +58,19 @@ def _card_id(request):
 
 def add_cart(request, product_id):
     product = Product.objects.get(id=product_id)
+    # input variation to cart
+    product_variation = []
+    if request.POST:
+         for item in request.POST:
+              key = item
+              value = request.POST[key]
+              try:
+                   variation = Variation.objects.get(product=product, variation_category__iexact=key, variation_value=value)
+                   product_variation.append(variation)
+              except:
+                   pass
+
+    # end input variation to cart
 
     try:
         cart = Cart.objects.get(cart_id = _card_id(request))
@@ -116,3 +134,15 @@ def cart(request, total=0, quantity=0, cart_items=None):
         'grand_total':grand_total,
     }
 	return render(request, 'pages/cart.html', context)
+
+def search(request):
+     if 'keyword' in request.GET:
+          keyword = request.GET['keyword']
+          if keyword:
+               products = Product.objects.order_by('-created_at').filter(Q(product_name__icontains=keyword) | Q(description__icontains=keyword))
+               product_count = products.count()
+     context = {
+         'products':products,
+         'product_count':product_count,
+     }
+     return render(request, 'pages/store.html', context)
