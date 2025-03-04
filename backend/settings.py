@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'userauths',
+    'customer',
+    'store',
+    'vendor',
+
 
     # Third-party apps
     'import_export',
@@ -125,3 +130,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Django Admin",
+    "site_header": "Django Admin",
+    "site_logo": "img/logo.png",
+    "welcome_sign": "Welcome",
+}
