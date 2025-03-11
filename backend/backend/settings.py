@@ -143,6 +143,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 JAZZMIN_SETTINGS = {
     "site_title": "Django Admin",
     "site_header": "Django Admin",
-    "site_logo": "nawa-dhawa.png",
+    # "site_logo": "nawa-dhawa.png",
     "welcome_sign": "Welcome",
 }

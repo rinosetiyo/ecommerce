@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from shortuuid.django_fields import ShortUUIDField # type: ignore
+from django.db.models.signals import post_save
 
 # Create your models here.
 class User(AbstractBaseUser):
@@ -49,3 +50,12 @@ class Profile(models.Model):
 
         super(Profile, self).save(*args, **kwargs)
     
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+post_save.connect(create_user_profile, sender=User)
+post_save.connect(save_user_profile, sender=User)
