@@ -1,11 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 from shortuuid.django_fields import ShortUUIDField # type: ignore
 from django.db.models.signals import post_save
-from django.conf import settings
 # Create your models here.
 
-class User(AbstractBaseUser):
+class User(AbstractUser):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=50)
     full_name = models.CharField(max_length=50, blank=True, null=True)
