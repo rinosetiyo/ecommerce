@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'userauths',
+    'store',
 
     # Third party apps
     'rest_framework',
