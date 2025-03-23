@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, AbstractUser
+from django.contrib.auth.models import AbstractUser
 from shortuuid.django_fields import ShortUUIDField # type: ignore
 from django.db.models.signals import post_save
 # Create your models here.
@@ -17,7 +17,7 @@ class User(AbstractUser):
         return self.email
     
     def save(self, *args, **kwargs):
-        email_username = self.email.split('@')
+        email_username = self.email.split('@')[0]
         if self.full_name == "" or self.full_name == None:
             self.full_name = email_username
         if self.username == "" or self.username == None:
