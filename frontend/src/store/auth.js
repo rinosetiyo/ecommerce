@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { mountStoreDevtools } from 'simple-zustand-devtools';
+import { mountStoreDevtool } from 'simple-zustand-devtools';
 
 const useAuthStore = create((set, get) => ({
   allUserData: null,
@@ -14,7 +14,7 @@ const useAuthStore = create((set, get) => ({
 }));
 
 if(import.meta.env.MODE) {
-mountStoreDevtools('Store', useAuthStore);
+mountStoreDevtool('Store', useAuthStore);
 }
 
 export { useAuthStore };

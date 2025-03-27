@@ -1,6 +1,7 @@
 import { useAuthStore } from '../store/auth';
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 
 export const login = async (username, password) => {
@@ -49,16 +50,16 @@ export const logout = () => {
   // alert('Logout successful');
 }
 
-export const setUser = async () => {
-  Cookies.set('access_token', access);
-  Cookies.set('refresh_token', refresh);
+export const setUser = async (accessToken, refreshToken) => {
+  Cookies.set('access_token', accessToken);
+  Cookies.set('refresh_token', refreshToken);
 
-  if(!accesssToken || !refreshToken) {
+  if(!accessToken || !refreshToken) {
     return;
   }
 
   if(isAccessTokenExpired(accessToken)) {
-    const response = await getRefreshToken(refreshToken);
+    const response = await getRefreshToken();
     setAuthUser(response.access, refreshToken);
   } else {
     setAuthUser(accessToken, refreshToken);
@@ -75,7 +76,7 @@ export const setAuthUser = (access_token, refresh_token) => {
     secure: true
   });
 
-  const user = jwt_decode(access_token);
+  const user = jwtDecode(access_token);
 
   if(user) {
     useAuthStore.getState().setUser(user);
@@ -93,7 +94,7 @@ export const getRefreshToken = async () => {
 
 export const isAccessTokenExpired = (access_token) => {
   try {
-    const decoded = jwt_decode(access_token);
+    const decoded = jwtDecode(access_token);
     return decoded.exp < Date.now() / 1000;
   }
   catch (error) {

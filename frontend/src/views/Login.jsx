@@ -30,12 +30,13 @@ function Login() {
       alert(error)
     } else {
       navigate('/')
-      resetForm
+      resetForm()
     }
     setIsLoading(false)
   }
   return (
     <div>
+      <h1>Login</h1>
       <form action="" onSubmit={handleLogin}>
         <input type="text" placeholder="Username" value={email} onChange={e => setEmail(e.target.value)} />
         <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
