@@ -4,10 +4,10 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 
-export const login = async (username, password) => {
+export const login = async (email, password) => {
   try {
     const { data, status } = await axios.post('user/token/', {
-      username,
+      email,
       password
     });
     if (status === 200) {
