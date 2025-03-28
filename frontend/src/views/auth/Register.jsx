@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import { register } from '../utils/auth'
+import { register } from '../../utils/auth'
 import { useNavigate } from 'react-router-dom'
-import { useAuthStore } from '../store/auth'
+import { useAuthStore } from '../../store/auth'
 
 function Register() {
     const [fullname, setFullname] = useState('')
