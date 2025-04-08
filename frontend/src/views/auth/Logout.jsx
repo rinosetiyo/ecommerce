@@ -23,18 +23,6 @@ function Logout() {
             <Link to="/checkout">Checkout</Link>
             <Link to="/orders">Orders</Link>
             <Link to="/wishlist">Wishlist</Link>
-            <Link to="/settings">Settings</Link>
-            <Link to="/support">Support</Link>
-            <Link to="/privacy">Privacy</Link>
-            <Link to="/terms">Terms</Link>
-            <Link to="/faq">FAQ</Link>
-            <Link to="/blog">Blog</Link>
-            <Link to="/portfolio">Portfolio</Link>
-            <Link to="/gallery">Gallery</Link>
-            <Link to="/testimonials">Testimonials</Link>
-            <Link to="/events">Events</Link>
-            <Link to="/news">News</Link>
-            <Link to="/careers">Careers</Link>
         </div>
     )
 }
