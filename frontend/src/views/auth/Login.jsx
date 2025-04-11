@@ -27,12 +27,13 @@ function Login() {
     setIsLoading(true)
     const { error } = await login(email, password)
     if (error) {
+      setIsLoading(false)
       alert(error)
     } else {
       navigate('/')
       resetForm()
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }
   return (
     <div>

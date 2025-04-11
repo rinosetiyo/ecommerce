@@ -9,6 +9,7 @@ function Register() {
     const [phone, setMobile] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
+    const [isLoading, setLoading] = useState(false)
     const navigate = useNavigate()
     const isLoggedIn = useAuthStore(state => state.isLoggedIn)
 
@@ -21,12 +22,14 @@ function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setLoading(true)
+
         const { error } = await register({fullname, email, phone, password, password2})
         if (error) {
             alert(JSON.stringify(error))
         } else {
             navigate('/login')
-            resetForm()
+            setLoading(false)
         }
     }
     return (
@@ -41,6 +44,10 @@ function Register() {
         <button type="submit">Register</button>
       </form>
     </div>
+    // {isLoading === true 
+    //     ? <p>Loading...</p> 
+    //     : null
+    // }
   )
 }
 
