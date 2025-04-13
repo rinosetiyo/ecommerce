@@ -88,6 +88,7 @@ class Vendor(models.Model):
         verbose_name_plural = "Vendors"
 
     def vendor_image(self):
+        # this is setting the image to be shown and fit in a 50x50 box
         return mark_safe('  <img src="%s" width="50" height="50" style="object-fit:cover; border-radius: 6px;" />' % (self.shop_image.url))
 
     def __str__(self):
