@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { login } from '../../utils/auth'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuthStore } from '../../store/auth'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -36,14 +37,50 @@ function Login() {
     }
   }
   return (
-    <div>
-      <h1>Login</h1>
-      <form action="" onSubmit={handleLogin}>
-        <input type="text" placeholder="Username" value={email} onChange={e => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-        <button type="submit" disabled={isLoading}>Login</button>
-        <Link to="/register">Register</Link>
-      </form>
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-header">
+              <h1 className="card-title text-center">Login</h1>
+            </div>
+            <div className="card-body">
+              <form onSubmit={handleLogin}>
+                <div className="form-group mb-3">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="text"
+                    id="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
+                <div className="form-group mb-3">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
+                <button type="submit" disabled={isLoading} className="btn btn-primary w-100">
+                  {isLoading ? 'Logging in...' : 'Login'}
+                </button>
+              </form>
+            </div>
+            <div className="card-footer text-center">
+              <Link to="/register" className="btn btn-link">
+                Register
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

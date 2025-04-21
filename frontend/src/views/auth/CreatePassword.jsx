@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import apiInstance from '../../utils/axios'
 
@@ -33,36 +33,46 @@ function CreatePassword() {
             }
         }
     }
-  return (
-    <div>
-        <h1>Create New Password</h1>
-        <form onSubmit={handlePasswordSubmit}>
-            <div>
-                <label htmlFor="password">New Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
+    return (
+        <>
+            <div className="container mt-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <h1 className="text-center mb-4">Create New Password</h1>
+                        <form onSubmit={handlePasswordSubmit}>
+                            <div className="mb-3">
+                                <label htmlFor="password" className="form-label">New Password</label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    className="form-control"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    className="form-control"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <button type="submit" className="btn btn-primary w-100">Create Password</button>
+                        </form>
+                        <div className="mt-3 text-center">
+                            <p>Already have an account? <a href="/login">Login</a></p>
+                            <p>Don't have an account? <a href="/register">Register</a></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                />
-            </div>
-            <button type="submit">Create Password</button>
-        </form>
-        <p>Already have an account? <a href="/login">Login</a></p>
-        <p>Don't have an account? <a href="/register">Register</a></p>
-    </div>
-  )
+        </>
+    )
 }
 
 export default CreatePassword

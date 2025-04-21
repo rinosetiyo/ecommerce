@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import apiInstance from '../../api/axios'
+import apiInstance from '../../utils/axios'
 import { useNavigate } from 'react-router-dom'
 
 function ForgotPassword() {
@@ -20,28 +20,39 @@ function ForgotPassword() {
         }
     }
     return (
-        <div>
-            <h1>Forgot Password</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+        <>
+            <div className="container mt-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <div className="card p-4">
+                            <h1 className="card-title text-center mb-4">Forgot Password</h1>
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Email:</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        className="form-control"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" className="btn btn-primary w-100">Reset Password</button>
+                            </form>
+                            <div className="mt-3 text-center">
+                                <p>
+                                    Remembered your password? <a href="/login">Login</a>
+                                </p>
+                                <p>
+                                    Don't have an account? <a href="/register">Register</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit">Reset Password</button>
-            </form>
-            <p>
-                Remembered your password? <a href="/login">Login</a>
-            </p>
-            <p>
-                Don't have an account? <a href="/register">Register</a>
-            </p>
-        </div>
+            </div>
+        </>
     )
 }
 
