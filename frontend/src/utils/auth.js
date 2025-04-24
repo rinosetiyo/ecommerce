@@ -1,5 +1,5 @@
 import { useAuthStore } from '../store/auth';
-import axios from 'axios';
+import axios from '../utils/axios';
 // import jwt_decode from 'jwt-decode';
 import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
