@@ -11,6 +11,7 @@ from userauths.models import User, Profile
 import shortuuid
 
 # Create your views here.
+
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 

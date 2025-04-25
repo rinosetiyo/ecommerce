@@ -1,6 +1,5 @@
 import { useAuthStore } from '../store/auth';
 import axios from '../utils/axios';
-// import jwt_decode from 'jwt-decode';
 import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
 
@@ -14,7 +13,7 @@ export const login = async (email, password) => {
       setAuthUser(data.access, data.refresh);
       // alert('Login successful');
     }
-    return { data, status: null };
+    return { data, status };
   } catch (error) {
     return { 
       data: null, 
@@ -25,23 +24,35 @@ export const login = async (email, password) => {
 
 export const register = async (full_name, email, phone, password, password2) => {
   try {
+    // Making a POST request to register a new user
     const { data } = await axios.post('user/register/', {
-      full_name,
-      email,
-      phone,
-      password,
-      password2
+        full_name,
+        email,
+        phone,
+        password,
+        password2,
     });
+
+    // Logging in the newly registered user and displaying success toast
     await login(email, password);
-    // alert('Registration successful');
-    return { data, status: null };
-  } catch (error) {
-    return { 
-      data: null, 
-      error: error.response.data?.detail || 'Something went wrong', 
+
+    // Displaying a success toast notification
+    // Toast.fire({
+    //     icon: 'success',
+    //     title: 'Signed Up Successfully'
+    // });
+
+    // Returning data and error information
+    return { data, error: null };
+
+} catch (error) {
+    // Handling errors and returning data and error information
+    return {
+        data: null,
+        error: error.response.data || 'Something went wrong',
     };
-  }
 }
+};
 
 export const logout = () => {
   Cookies.remove('access_token');

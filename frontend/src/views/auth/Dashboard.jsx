@@ -3,10 +3,10 @@ import { useAuthStore } from '../../store/auth'
 import { Link } from 'react-router-dom'
 
 function Dashboard() {
-    // const [isLoggedIn, setIsLoggedIn] = useAuthStore(state => ([
-    //     state.isLoggedIn,
-    //     state.setIsLoggedIn
-    // ]))
+    const [isLoggedIn, setIsLoggedIn] = useAuthStore(state => ([
+        state.isLoggedIn,
+        state.setIsLoggedIn
+    ]))
 
     return (
         <div>
