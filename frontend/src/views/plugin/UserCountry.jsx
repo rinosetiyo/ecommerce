@@ -12,12 +12,8 @@ function GetCurrentAddress() {
             .then((response) => response.json())
             .then((data) => setAdd(data.address))
         })
-    })
-  return (
-    <div>
-      
-    </div>
-  )
+    }, [])
+    return add
 }
 
 export default GetCurrentAddress
